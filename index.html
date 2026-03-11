@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemberEngine – Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+    <nav class="navbar">
+        <div class="logo">MemberEngine</div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="docs.html">Docs</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li id="loginNav"><a href="signin.html">Sign In</a></li>
+        </ul>
+
+        <a href="signup.html" id="signupBtn" class="btn-outline">Get Started</a>
+
+        <div id="profileNav" style="display:none; gap:1rem; align-items:center;">
+            <span id="profileName"></span>
+            <span id="profilePlan"></span>
+            <button id="logoutBtn" class="btn-outline">Logout</button>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <span class="badge">Membership Engine v1.0</span>
+            <h1>Unlock the tier<br>that fits you.</h1>
+            <p>
+                Flexible subscription tiers with smart access logic.
+                Scale from free to enterprise with granular feature control.
+            </p>
+
+            <div class="hero-buttons" id="heroButtons">
+                <a href="signup.html" class="btn-primary">Get Started Free →</a>
+                <a href="pricing.html" class="btn-secondary">View Plans</a>
+            </div>
+
+            <div class="stats">
+                <span>2,400+ teams</span>
+                <span>99.9% uptime</span>
+                <span>SOC2 compliant</span>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>© 2026 MemberEngine. All rights reserved.</p>
+</footer>
+<script>
+async function loadUser() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    try {
+        const res = await fetch('http://localhost:5000/api/auth/me', {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
+        if (!res.ok) return;
+        const user = await res.json();
+        // Hide logged-out UI
+        document.getElementById('loginNav').style.display = 'none';
+        document.getElementById('signupBtn').style.display = 'none';
+        document.getElementById('heroButtons').style.display = 'none';
+        // Show logged-in UI
+        document.getElementById('profileNav').style.display = 'flex';
+        document.getElementById('profileName').textContent = user.name;
+        document.getElementById('profilePlan').textContent = `(${user.plan})`;
+    } catch (err) {
+        console.error('Auth error:', err);
+    }
+}
+document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    localStorage.clear();
+    window.location.href = 'signin.html';
+});
+loadUser();
+</script>
+<script src="auth.js"></script>
+</body>
+</html>

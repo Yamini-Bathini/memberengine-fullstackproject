@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure Payment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="payment-container">
+    <div class="payment-card">
+        <h2>Complete Your Upgrade</h2>
+        <p id="planInfo"></p>
+
+        <form id="paymentForm">
+            <input type="text" id="cardNumber" placeholder="Card Number" required>
+            <input type="text" id="cardName" placeholder="Card Holder Name" required>
+            <input type="text" id="expiry" placeholder="MM/YY" required>
+            <input type="text" id="cvv" placeholder="CVV" required>
+
+            <button type="submit" class="btn-primary">Pay Now</button>
+        </form>
+
+        <p class="secure-text">🔒 Secure Payment Simulation</p>
+    </div>
+</div>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const plan = urlParams.get('plan');
+
+document.getElementById('planInfo').innerText = `You are upgrading to ${plan} Plan`;
+
+document.getElementById('paymentForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem('token');
+    const cardNumber = document.getElementById('cardNumber').value;
+
+    const res = await fetch('http://localhost:5000/api/payment/pay', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({ plan, cardNumber })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+        alert("Payment Successful! Plan upgraded.");
+        window.location.href = 'index.html';
+    } else {
+        alert(data.message);
+    }
+});
+</script>
+
+</body>
+</html>

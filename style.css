@@ -1,0 +1,434 @@
+/* =================================
+   GLOBAL RESET
+================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: #0a0a0a;
+    color: #f0f0f0;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =================================
+   NAVBAR
+================================= */
+header {
+    background: #111;
+    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.08);
+    padding: 1rem 2rem;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #FFD700;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ddd;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #FFD700;
+}
+
+/* =================================
+   BUTTONS
+================================= */
+.btn-primary {
+    background: #FFD700;
+    color: #0a0a0a;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: #e6c200;
+}
+
+.btn-outline {
+    border: 1px solid #FFD700;
+    color: #FFD700;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-outline:hover {
+    background: #FFD700;
+    color: #0a0a0a;
+}
+
+/* =================================
+   HERO SECTION
+================================= */
+.hero {
+    background: linear-gradient(145deg, #111 0%, #1a1a1a 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    flex: 1;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+}
+
+.badge {
+    background: #222;
+    color: #FFD700;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+/* =================================
+   PRICING PAGE
+================================= */
+.pricing-hero {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.pricing-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.pricing-hero p {
+    color: #bbb;
+    margin-bottom: 2rem;
+}
+
+/* Toggle */
+.billing-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    margin: 2rem 0;
+}
+
+.monthly-label,
+.yearly-label {
+    font-weight: 500;
+    color: #bbb;
+}
+
+.monthly-label.active,
+.yearly-label.active {
+    color: #FFD700;
+    font-weight: 600;
+}
+
+.discount {
+    background: #222;
+    color: #FFD700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #444;
+    transition: 0.3s;
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+input:checked + .slider {
+    background-color: #FFD700;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Pricing Cards */
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 300px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.15);
+}
+
+.card.popular {
+    border: 2px solid #FFD700;
+}
+
+.popular-badge {
+    background: #FFD700;
+    color: #0a0a0a;
+    padding: 0.3rem 1rem;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.card h2 {
+    margin-bottom: 0.5rem;
+}
+
+.card .price {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #FFD700;
+    margin: 1rem 0;
+}
+
+.card .price span {
+    font-size: 1rem;
+    color: #888;
+}
+
+.features {
+    list-style: none;
+    margin: 1.5rem 0;
+}
+
+.features li {
+    padding: 0.4rem 0;
+    color: #ddd;
+}
+
+.features li:before {
+    content: "✓ ";
+    color: #FFD700;
+}
+
+/* Upgrade Buttons */
+.upgrade-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    background: #FFD700;
+    color: #0a0a0a;
+    transition: 0.2s;
+    margin-top: 15px;
+}
+
+.upgrade-btn:hover {
+    background: #e6c200;
+}
+
+.upgrade-btn:disabled {
+    background: #333;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* =================================
+   BLOG PAGE
+================================= */
+.blog-container {
+    width: 70%;
+    margin: 3rem auto;
+}
+
+#blogForm input,
+#blogForm textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #111;
+    color: white;
+}
+
+#blogForm textarea {
+    height: 160px;
+}
+
+.blog-card {
+    background: #111;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.feature-option {
+    margin: 10px 0;
+}
+
+/* =================================
+   AUTH FORMS
+================================= */
+.signin-form,
+.signup-form {
+    background: #111;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #333;
+    max-width: 400px;
+    margin: 3rem auto;
+}
+
+.signin-form input,
+.signup-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #0f0f0f;
+    color: white;
+}
+
+/* =================================
+   PAYMENT PAGE
+================================= */
+.payment-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-card {
+    background: #111;
+    padding: 40px;
+    border-radius: 16px;
+    width: 400px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.payment-card input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #0f0f0f;
+    color: white;
+}
+
+.secure-text {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #888;
+}
+
+/* =================================
+   FOOTER
+================================= */
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #222;
+    color: #777;
+    margin-top: auto;
+}
+.btn-secondary {
+    background: transparent;
+    color: #FFD700;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid #FFD700;
+    transition: 0.2s;
+}
+
+.btn-secondary:hover {
+    background: #222;
+}
+.btn-primary,
+.btn-secondary {
+    text-decoration: none;
+}

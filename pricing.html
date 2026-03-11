@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pricing – MemberEngine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pricing – MemberEngine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">MemberEngine</div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="docs.html">Docs</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li id="loginNav"><a href="signin.html">Sign In</a></li>
+        </ul>
+
+        <a href="signup.html" id="signupBtn" class="btn-outline">Get Started</a>
+
+        <div id="profileNav" style="display:none; gap:1rem; align-items:center;">
+            <span id="profileName"></span>
+            <span id="profilePlan"></span>
+            <button id="logoutBtn" class="btn-outline">Logout</button>
+        </div>
+    </nav>
+</header>
+
+<section class="pricing-hero">
+    <h1>Choose Your Writing Plan</h1>
+    <p>Unlock powerful blogging tools and grow your audience.</p>
+
+    <div class="billing-toggle">
+        <span id="monthlyLabel" class="toggle-label active">Monthly</span>
+
+        <label class="switch">
+            <input type="checkbox" id="billingToggle">
+            <span class="slider"></span>
+        </label>
+
+        <span id="yearlyLabel" class="toggle-label">
+            Yearly <span class="discount">Save 15%</span>
+        </span>
+    </div>
+</section>
+
+<section class="pricing-section">
+    <div id="pricingCards" class="pricing-grid"></div>
+</section>
+
+<footer>
+    <p>© 2026 MemberEngine. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>

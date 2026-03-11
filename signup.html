@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemberEngine – Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="logo">MemberEngine</div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="docs.html">Docs</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li id="loginNav"><a href="signin.html">Sign In</a></li>
+        </ul>
+
+        <a href="signup.html" id="signupBtn" class="btn-outline">Get Started</a>
+
+        <div id="profileNav" style="display:none; gap:1rem; align-items:center;">
+            <span id="profileName"></span>
+            <span id="profilePlan"></span>
+            <button id="logoutBtn" class="btn-outline">Logout</button>
+        </div>
+    </nav>
+</header>
+
+    <main class="content-page">
+        <center><h1>Create an account</h1></center>
+        <form class="signup-form">
+            
+            <div>
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="John Doe" required>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="you@example.com" required>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <div>
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-primary">Sign Up</button>
+            <p class="form-footer">Already have an account? <a href="signin.html">Sign in</a></p>
+        </form>
+    </main>
+
+    <footer>
+        <p>© 2026 MemberEngine. All rights reserved.</p>
+    </footer>
+    <script>
+if (localStorage.getItem('token')) {
+    window.location.href = 'index.html';
+}
+
+document.querySelector('.signup-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirm = document.getElementById('confirm-password').value;
+
+    if (password !== confirm) {
+        alert('Passwords do not match');
+        return;
+    }
+
+    try {
+        const res = await fetch('http://localhost:5000/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            alert("Registered successfully!");
+            alert("Logged in successfully!");
+            localStorage.setItem('token', data.token);
+            window.location.href = 'index.html';
+        } else {
+            alert(data.message);
+        }
+
+    } catch (err) {
+        alert('Network error');
+    }
+});
+</script>
+
+<script src="auth.js"></script>
+</body>
+</html>

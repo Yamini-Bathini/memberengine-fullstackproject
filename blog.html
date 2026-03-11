@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Blogs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <header>
+    <nav class="navbar">
+        <div class="logo">MemberEngine</div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="docs.html">Docs</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li id="loginNav"><a href="signin.html">Sign In</a></li>
+        </ul>
+
+        <a href="signup.html" id="signupBtn" class="btn-outline">Get Started</a>
+
+        <div id="profileNav" style="display:none; gap:1rem; align-items:center;">
+            <span id="profileName"></span>
+            <span id="profilePlan"></span>
+            <button id="logoutBtn" class="btn-outline">Logout</button>
+        </div>
+    </nav>
+</header>
+
+<div class="blog-container">
+    <h1>Write a Blog</h1>
+
+    <form id="blogForm">
+        <input type="text" id="title" placeholder="Blog Title" required>
+        <textarea id="content" placeholder="Write your blog..." required></textarea>
+
+        <label class="feature-option">
+            <input type="checkbox" id="isFeatured"> Mark as Featured ⭐
+        </label>
+
+        <button type="submit" class="btn-primary">Publish</button>
+    </form>
+
+    <h2>Your Blogs</h2>
+    <div id="blogList"></div>
+</div>
+
+<script src="auth.js"></script>
+
+<script>
+const token = localStorage.getItem('token');
+if (!token) window.location.href = 'signin.html';
+
+async function loadBlogs() {
+    const res = await fetch('http://localhost:5000/api/blogs/mine', {
+        headers: { 'Authorization': 'Bearer ' + token }
+    });
+
+    const blogs = await res.json();
+    const container = document.getElementById('blogList');
+    container.innerHTML = '';
+
+    blogs.forEach(blog => {
+        container.innerHTML += `
+            <div class="blog-card">
+                <h3>${blog.title} ${blog.is_featured ? '⭐' : ''}</h3>
+                <p>${blog.content}</p>
+                <small>${new Date(blog.created_at).toLocaleString()}</small>
+            </div>
+        `;
+    });
+}
+
+document.getElementById('blogForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').value;
+    const isFeatured = document.getElementById('isFeatured').checked;
+
+    const res = await fetch('http://localhost:5000/api/blogs', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({ title, content, isFeatured })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+        alert("Blog published successfully!");
+        document.getElementById('blogForm').reset();
+        loadBlogs();
+    } else {
+        alert(data.message);
+    }
+});
+
+loadBlogs();
+</script>
+
+</body>
+</html>
