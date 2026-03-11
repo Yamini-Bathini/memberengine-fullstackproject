@@ -1,5 +1,4 @@
 # memberengine-fullstackproject
-# memberengine-fullstackproject
 # MemberEngine – Subscription-Based Blogging Platform
 
 MemberEngine is a **full-stack web application** that demonstrates a **membership-based SaaS platform** where users can sign up, subscribe to plans, and write blog posts based on their subscription tier.
